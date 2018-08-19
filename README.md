@@ -1,2 +1,2 @@
 # 🕓 timeFold
-Cross-validation tools for time-series data
+Cross-validation for time-series data
