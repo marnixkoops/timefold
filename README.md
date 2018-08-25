@@ -1,3 +1,2 @@
-# ![logo](framer-logo.png)
-Cross-validation for time-series data
+![logo](framer-logo.png)
 ![methods](logo2.png)
