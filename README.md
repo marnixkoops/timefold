@@ -1,4 +1,3 @@
-# 🕓 timeFold
+# ![logo](framer-logo.png)
 Cross-validation for time-series data
-
-![logo2.png](logo2.png)
+![methods](logo2.png)
