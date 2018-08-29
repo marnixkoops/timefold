@@ -19,7 +19,7 @@ class timefold(object):
             * Split into one def per CV method
             * Shrinkage folds
             * Write docstrings
-            * Write documentation
+            * Write documentation (CV books)
             * Write Github doc including designs
             * Create examples ipynb
             * Package and publish to PyPI https://pypi.org/help/#publishing
@@ -179,8 +179,11 @@ def split_to_train_test(df, label_column, train_frac=0.8):
 
 train, test = split_to_train_test(df, 'target', 0.5)
 
+###########################################################################################
 
-y = np.random.randint(2, size=25)
+
+y = np.append([0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0], np.random.randint(2, size=10))
+len(y)
 
 
 def get_train_test_inds(y, train_proportion=0.5):
@@ -196,7 +199,7 @@ def get_train_test_inds(y, train_proportion=0.5):
     test_index = np.zeros(len(y), dtype=bool)
     values = np.unique(y)
     for value in values:
-        value_inds = np.nonzero(y == value)[0]
+        value_inds = np.nonzero(y == value)[0] # Get indices per value in y
         # np.random.shuffle(value_inds)
         n = int(train_proportion * len(value_inds))
 
@@ -204,12 +207,50 @@ def get_train_test_inds(y, train_proportion=0.5):
         test_index[value_inds[n:]] = True
 
     return train_index, test_index
-    # yield train_index, test_index
+    #yield train_index, test_index
 
 
 for train_index, test_index in get_train_test_inds(y):
-    print("TRAIN IND:", train_index, "TEST IND:", test_index)
+    print("TRAIN IND:", train_index * 1, "TEST IND:", test_index * 1)
     print("TRAIN:", y[train_index], "TEST:", y[test_index])
 
 train_index, test_index = get_train_test_inds(y)
 sum(y[train_index]), sum(y[test_index])
+
+np.nonzero(y == 0)[0]
+
+
+folds = 4
+folds += 1
+y = np.array(y)
+train_index = np.zeros(len(y), dtype=int)
+test_index = np.zeros(len(y), dtype=int)
+values = np.unique(y)
+value = 0
+
+y_obs = y.shape[0]
+indices = np.arange(y_obs)
+fold_indices = np.array_split(indices, folds, axis=0)
+fold_sizes = [len(fold) for fold in fold_indices]
+
+cons_frac = folds // 2
+cons_partition = sum(fold_sizes[0:cons_frac])
+
+y[:cons_partition]
+y[cons_partition:]
+
+value_inds1 = np.nonzero(y[:cons_partition] == value)[0] # Get indices per value in y for first cons partition
+value_inds2 = np.nonzero(y[cons_partition:] == value)[0] + cons_partition # Start counting from end of first cons partition and add the indices of the first part!
+
+n = int(train_proportion * len(value_inds2))
+
+train_index[value_inds2[:n]] = 2
+test_index[value_inds2[n:]] = 2
+
+train_index, test_index
+
+y[train_index], y[test_index]
+
+sum(y * train_index), sum(y * test_index)
+
+list(zip(y, train_index, test_index))
