@@ -182,7 +182,7 @@ train, test = split_to_train_test(df, 'target', 0.5)
 ###########################################################################################
 
 
-y = np.append([0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0], np.random.randint(2, size=10))
+y = np.append([0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], np.random.randint(2, size=10))
 len(y)
 
 
@@ -242,10 +242,10 @@ y[cons_partition:]
 value_inds1 = np.nonzero(y[:cons_partition] == value)[0] # Get indices per value in y for first cons partition
 value_inds2 = np.nonzero(y[cons_partition:] == value)[0] + cons_partition # Start counting from end of first cons partition and add the indices of the first part!
 
-n = int(train_proportion * len(value_inds2))
+n = int(train_proportion * len(value_inds1))
 
-train_index[value_inds2[:n]] = 2
-test_index[value_inds2[n:]] = 2
+train_index[value_inds1[:n]] = 1
+test_index[value_inds1[n:]] = 1
 
 train_index, test_index
 
@@ -254,3 +254,19 @@ y[train_index], y[test_index]
 sum(y * train_index), sum(y * test_index)
 
 list(zip(y, train_index, test_index))
+
+df = pd.DataFrame(np.transpose([y, train_index, test_index]))
+df.columns = ['y', 'train_fold', 'test_fold']
+df.head()
+
+df[df['train_fold'] == 1]['y'].sum()
+df[df['test_fold'] == 1]['y'].sum()
+
+df[df['train_fold'] == 2]['y'].sum()
+df[df['test_fold'] == 2]['y'].sum()
+
+df[df['train_fold'] == 1].count()
+df[df['test_fold'] == 1].count()
+
+df[df['train_fold'] == 2].count()
+df[df['test_fold'] == 2].count()
