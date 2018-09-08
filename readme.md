@@ -12,7 +12,7 @@ Package is under development.
 | Nested           | `nested`     | Growing train folds                                                       |
 | Windowed         | `window`     | Moving train and test folds                                               |
 | One Step Ahead   | `step`       | One step ahead folds, size of test fold can be set                        |
-| Shrinking        | `shrink`     | constant testing fold, shrinking training folds                           |
+| Shrinking        | `shrink`     | constant test fold, shrinking train folds                                 |
 | Stratified       | `stratified` | To be implemented.  Preserves a ratio such as class distribution per fold |
 
 ## USAGE
