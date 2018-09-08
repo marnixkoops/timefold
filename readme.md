@@ -4,11 +4,7 @@
 </p>
 
 ## INFO
-Package is still under heavy development.
-
-`sklearn` compatible.
-
-## INSTALLATION
+Package is under development.
 
 ## METHODS
 | Cross-validation | Parameters   | Description                                                               |
@@ -20,7 +16,6 @@ Package is still under heavy development.
 | Stratified       | `stratified` | To be implemented.  Preserves a ratio such as class distribution per fold |
 
 ## USAGE
-
 ```python
 from timefold import timefold
 import numpy as np
