@@ -44,7 +44,7 @@ list(zip(X, y))
 # Create timefold object for nested folds
 tf = timefold(folds=3, method='nested')
 
-# Generate and print generated train-test pair indices
+# Generate and print train-test pair indices
 for train_index, test_index in tf.split(X):
     print("TRAIN:", train_index, "TEST:", test_index)
     X_train, X_test = X[train_index], X[test_index]
@@ -56,7 +56,7 @@ TRAIN: [0 1 2 3 4 5 6 7] TEST: [8 9]
 # Create timefold object for windowed folds
 tf = timefold(folds=3, method='window')
 
-# Generate and print generated train-test pair indices
+# Generate and print train-test pair indices
 for train_index, test_index in tf.split(X):
     print("TRAIN:", train_index, "TEST:", test_index)
     X_train, X_test = X[train_index], X[test_index]
@@ -68,7 +68,7 @@ TRAIN: [6 7] TEST: [8 9]
 # Create timefold object for one step ahead folds
 tf = timefold(folds=3, method='step', test_size=1)
 
-# Generate and print generated train-test pair indices
+# Generate and print train-test pair indices
 for train_index, test_index in tf.split(X):
     print("TRAIN:", train_index, "TEST:", test_index)
     X_train, X_test = X[train_index], X[test_index]
@@ -86,7 +86,7 @@ TRAIN: [0 1 2 3 4 5 6 7 8] TEST: [9]
 # Create timefold object for shrinkage folds
 tf = timefold(folds=3, method='shrink')
 
-# Generate and print generated train-test pair indices
+# Generate and print train-test pair indices
 for train_index, test_index in tf.split(X):
     print("TRAIN:", train_index, "TEST:", test_index)
     X_train, X_test = X[train_index], X[test_index]
