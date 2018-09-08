@@ -21,7 +21,7 @@ Package is still under heavy development.
 
 ## USAGE
 
-```
+```python
 from timefold import timefold
 import numpy as np
 
