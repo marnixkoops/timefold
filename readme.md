@@ -66,7 +66,7 @@ TRAIN: [3 4 5] TEST: [6 7 8]
 TRAIN: [6 7] TEST: [8 9]
 
 # Create timefold object for one step ahead folds
-tf = timefold(folds=3, method='step', test_size=1)
+tf = timefold(method='step', test_size=1)
 
 # Generate and print train-test pair indices
 for train_index, test_index in tf.split(X):
