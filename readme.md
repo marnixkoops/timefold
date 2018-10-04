@@ -4,7 +4,7 @@
 </p>
 
 ## INFO
-Package is under development.
+Under development.
 
 ## METHODS
 | Cross-validation | Parameters   | Description                                                               |
