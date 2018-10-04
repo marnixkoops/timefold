@@ -1,5 +1,6 @@
 import numpy as np
 
+
 class timefold(object):
     """
     Cross-validation methods for timeseries data.
@@ -52,10 +53,12 @@ class timefold(object):
             To be implemented
     """
 
-    def __init__(self, folds=10, method='nested', test_size=1):
+    def __init__(self, folds=10, method='nested', test_size=1, step_size=1, min_train_size=1):
         self.folds = folds
         self.method = method
         self.test_size = test_size
+        self.step_size = step_size
+        self.min_train_size = min_train_size
 
     def split(self, X):
         """
@@ -64,6 +67,8 @@ class timefold(object):
         folds = self.folds
         method = self.method
         test_size = self.test_size
+        step_size = self.step_size
+        min_train_size = self.min_train_size
 
         X_obs = X.shape[0]
         indices = np.arange(X_obs)
@@ -87,9 +92,10 @@ class timefold(object):
                 yield(indices[start:end], indices[end:end + size])
 
         elif method == 'step':
-            steps = indices[1:]
+            steps = indices[min_train_size:]
             for step in steps:
                 yield(indices[:step], indices[step:step + test_size])
+
 
         elif method == 'shrink':
             for start, size in zip(train_starts, fold_sizes):
