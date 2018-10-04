@@ -12,7 +12,7 @@ class timefold(object):
             Example (folds=3):
             TRAIN: [0 1 2] TEST: [3 4 5]
             TRAIN: [0 1 2 3 4 5] TEST: [6 7 8]
-            TRAIN: [0 1 2 3 4 5 6 7] TEST: [8 9]
+            TRAIN: [0 1 2s 3 4 5 6 7] TEST: [8 9]
 
         * window
             Generates train-test pair indices with a moving window.
@@ -53,12 +53,12 @@ class timefold(object):
             To be implemented
     """
 
-    def __init__(self, folds=10, method='nested', test_size=1, step_size=1, min_train_size=1):
+    def __init__(self, folds=10, method='nested', min_train_size=1, min_test_size=1, step_size=1):
         self.folds = folds
         self.method = method
-        self.test_size = test_size
-        self.step_size = step_size
         self.min_train_size = min_train_size
+        self.min_test_size = min_test_size
+        self.step_size = step_size
 
     def split(self, X):
         """
@@ -66,9 +66,9 @@ class timefold(object):
         """
         folds = self.folds
         method = self.method
-        test_size = self.test_size
-        step_size = self.step_size
         min_train_size = self.min_train_size
+        min_test_size = self.min_test_size
+        step_size = self.step_size
 
         X_obs = X.shape[0]
         indices = np.arange(X_obs)
@@ -92,9 +92,9 @@ class timefold(object):
                 yield(indices[start:end], indices[end:end + size])
 
         elif method == 'step':
-            steps = indices[min_train_size:]
+            steps = np.arange(min_train_size, indices[-1], step_size)
             for step in steps:
-                yield(indices[:step], indices[step:step + test_size])
+                yield(indices[:step], indices[step:step + min_test_size])
 
 
         elif method == 'shrink':
