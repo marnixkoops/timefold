@@ -15,7 +15,7 @@ Package is under development. `sklearn` compatible.
 | window     | `folds`                                             | Moving train and test folds                                              |
 | step       | `min_train_size`, `min_test_size`, `step_size` | Step ahead folds. Size of train, test and step can be set                |
 | shrinking  | `folds`                                             | Constant test fold, shrinking train folds                                |
-| stratified | `folds`                                             | To be implemented. Preserves a ratio such as class distribution per fold |
+| stratified | `folds`, `target`                                             | To be implemented. Preserves a ratio such as class distribution per fold |
 
 ## USAGE
 ```python
