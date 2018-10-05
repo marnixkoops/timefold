@@ -11,7 +11,7 @@ Package is under development. Cross-validation methods for time-series data in P
 |------------|-----------------------------------------------------|--------------------------------------------------------------------------|
 | nested     | `folds`                                             | Growing train folds                                                      |
 | window     | `folds`                                             | Moving train and test folds                                              |
-| step       | `min\_train\_size`, `min\_test\_size`, `step\_size` | Step ahead folds. Size of train, test and step can be set                |
+| step       | `min_train_size`, `min_test_size`, `step_size` | Step ahead folds. Size of train, test and step can be set                |
 | shrinking  | `folds`                                             | Constant test fold, shrinking train folds                                |
 | stratified | `folds`                                             | To be implemented. Preserves a ratio such as class distribution per fold |
 
