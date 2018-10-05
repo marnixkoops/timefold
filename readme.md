@@ -4,7 +4,7 @@
 </p>
 
 ## INFO
-Package is under development. Cross-validation methods for time-series data in Python.
+Package is under development. Cross-validation methods for time-series data in Python. `sklearn` compatible.
 
 ## METHODS
 | Method     | Parameters                                          | Description                                                              |
