@@ -4,16 +4,16 @@
 </p>
 
 ## INFO
-Under development.
+Package is under development. Cross-validation methods for time-series data in Python.
 
 ## METHODS
-| Cross-validation | Parameters   | Description                                                               |
-|------------------|--------------|---------------------------------------------------------------------------|
-| Nested           | `nested`     | Growing train folds                                                       |
-| Windowed         | `window`     | Moving train and test folds                                               |
-| Step Ahead       | `step`       | Step ahead folds, size of train, test and step can be set                 |
-| Shrinking        | `shrink`     | constant test fold, shrinking train folds                                 |
-| Stratified       | `stratified` | To be implemented.  Preserves a ratio such as class distribution per fold |
+| Method     | Parameters                                          | Description                                                              |
+|------------|-----------------------------------------------------|--------------------------------------------------------------------------|
+| nested     | `folds`                                             | Growing train folds                                                      |
+| window     | `folds`                                             | Moving train and test folds                                              |
+| step       | `min\_train\_size`, `min\_test\_size`, `step\_size` | Step ahead folds. Size of train, test and step can be set                |
+| shrinking  | `folds`                                             | Constant test fold, shrinking train folds                                |
+| stratified | `folds`                                             | To be implemented. Preserves a ratio such as class distribution per fold |
 
 ## USAGE
 ```python
@@ -77,6 +77,18 @@ TRAIN: [0 1 2 3 4 5] TEST: [6]
 TRAIN: [0 1 2 3 4 5 6] TEST: [7]
 TRAIN: [0 1 2 3 4 5 6 7] TEST: [8]
 TRAIN: [0 1 2 3 4 5 6 7 8] TEST: [9]
+
+# Create timefold object for two steps ahead folds with a minimum train and test fold size
+tf = timefold(method='step', min_train_size=4, min_test_size=3, step_size=2)
+
+# Generate and print train-test pair indices
+for train_index, test_index in tf.split(X):
+    print("TRAIN:", train_index, "TEST:", test_index)
+    X_train, X_test = X[train_index], X[test_index]
+    
+TRAIN: [0 1 2 3] TEST: [4 5 6]
+TRAIN: [0 1 2 3 4 5] TEST: [6 7 8]
+TRAIN: [0 1 2 3 4 5 6 7] TEST: [ 8  9 10]
 
 # Create timefold object for shrinkage folds
 tf = timefold(folds=3, method='shrink')
