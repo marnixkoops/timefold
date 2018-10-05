@@ -78,16 +78,15 @@ TRAIN: [0 1 2 3 4 5 6] TEST: [7]
 TRAIN: [0 1 2 3 4 5 6 7] TEST: [8]
 TRAIN: [0 1 2 3 4 5 6 7 8] TEST: [9]
 
-# Create timefold object for two steps ahead folds with a minimum train and test fold size
-tf = timefold(method='step', min_train_size=4, min_test_size=3, step_size=2)
+# Create timefold object for 3 steps ahead folds with a minimum train and test fold size
+tf = timefold(method='step', min_train_size=5, min_test_size=3, step_size=3)
 
 # Generate and print train-test pair indices
 for train_index, test_index in tf.split(X):
     print("TRAIN:", train_index, "TEST:", test_index)
     X_train, X_test = X[train_index], X[test_index]
     
-TRAIN: [0 1 2 3] TEST: [4 5 6]
-TRAIN: [0 1 2 3 4 5] TEST: [6 7 8]
+TRAIN: [0 1 2 3 4] TEST: [5 6 7]
 TRAIN: [0 1 2 3 4 5 6 7] TEST: [ 8  9 10]
 
 # Create timefold object for shrinkage folds
