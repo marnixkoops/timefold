@@ -4,9 +4,7 @@
 </p>
 
 ## INFO
-Cross-validation methods for time-series data in Python.
-
-Package is under development. `sklearn` compatible.
+Cross-validation methods for time-series data in Python, `sklearn` compatible.
 
 ## METHODS
 | Method     | Parameters                                          | Description                                                              |
